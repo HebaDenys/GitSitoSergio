@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import heroImage from '../assets/images/Immagine_Hero.jpg'
+import { motion } from 'framer-motion';
+import { HeroContent } from './molecules';
+import heroImage from '../assets/images/Immagine_Hero.jpg';
 
 const Hero = () => {
   return (
@@ -11,31 +11,12 @@ const Hero = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="hero-content">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Il Tuo Trasloco in Mani Esperte
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Con cura, professionalità e attenzione per i tuoi ricordi più preziosi.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <Link to="/contattaci" className="cta-button">
-            Inizia Ora
-          </Link>
-        </motion.div>
-      </div>
+      <HeroContent
+        title="Il Tuo Trasloco in Mani Esperte"
+        description="Con cura, professionalità e attenzione per i tuoi ricordi più preziosi."
+        ctaText="Inizia Ora"
+        ctaTo="/contattaci"
+      />
       <div className="hero-image zoom-in">
         <motion.img
           src={heroImage}
@@ -47,7 +28,7 @@ const Hero = () => {
         />
       </div>
     </motion.section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

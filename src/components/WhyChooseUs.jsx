@@ -1,12 +1,12 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 
 const WhyChooseUs = () => {
   const reasons = [
-    "Esperienza decennale nel settore",
-    "Personale qualificato e affidabile",
-    "Cura dei dettagli per ogni oggetto",
-    "Prezzi trasparenti e competitivi"
-  ]
+    'Esperienza decennale nel settore',
+    'Personale qualificato e affidabile',
+    'Cura dei dettagli per ogni oggetto',
+    'Prezzi trasparenti e competitivi',
+  ];
 
   return (
     <motion.section
@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
         ))}
       </motion.ul>
     </motion.section>
-  )
-}
+  );
+};
 
-export default WhyChooseUs
+export default WhyChooseUs;

@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
-import Hero from '../components/Hero'
-import Services from '../components/Services'
-import About from '../components/About'
-import WhyChooseUs from '../components/WhyChooseUs'
-import Testimonials from '../components/Testimonials'
+import { motion } from 'framer-motion';
+import Hero from '../components/Hero';
+import Services from '../components/Services';
+import About from '../components/About';
+import WhyChooseUs from '../components/WhyChooseUs';
+import Testimonials from '../components/Testimonials';
 
 const Home = () => {
   return (
@@ -19,7 +19,7 @@ const Home = () => {
       <WhyChooseUs />
       <Testimonials />
     </motion.div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,55 +1,62 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+
+/* eslint-env browser */
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
     telefono: '',
-    messaggio: ''
-  })
+    messaggio: '',
+  });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault();
 
     // Basic validation
-    if (!formData.nome || !formData.email || !formData.telefono || !formData.messaggio) {
-      alert('Per favore, compila tutti i campi obbligatori.')
-      return
+    if (
+      !formData.nome ||
+      !formData.email ||
+      !formData.telefono ||
+      !formData.messaggio
+    ) {
+      window.alert('Per favore, compila tutti i campi obbligatori.');
+      return;
     }
 
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      alert('Per favore, inserisci un indirizzo email valido.')
-      return
+      window.alert('Per favore, inserisci un indirizzo email valido.');
+      return;
     }
 
     // Phone validation (Italian format)
-    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,15}$/
+    const phoneRegex = /^[+]?[0-9\s\-()]{8,15}$/;
     if (!phoneRegex.test(formData.telefono)) {
-      alert('Per favore, inserisci un numero di telefono valido.')
-      return
+      window.alert('Per favore, inserisci un numero di telefono valido.');
+      return;
     }
 
     // Simulate form submission
-    alert('Grazie per il tuo messaggio! Ti contatteremo presto.')
+    window.alert('Grazie per il tuo messaggio! Ti contatteremo presto.');
 
     // Reset form
     setFormData({
       nome: '',
       email: '',
       telefono: '',
-      messaggio: ''
-    })
-  }
+      messaggio: '',
+    });
+  };
 
   return (
     <motion.section
@@ -163,7 +170,7 @@ const Contact = () => {
         </motion.div>
       </div>
     </motion.section>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

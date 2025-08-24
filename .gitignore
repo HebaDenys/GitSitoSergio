@@ -281,3 +281,4 @@ yarn-error.log*
 # Keep the .nojekyll file in dist/ but ignore it in root
 .nojekyll
 !dist/.nojekyll
+*storybook.log

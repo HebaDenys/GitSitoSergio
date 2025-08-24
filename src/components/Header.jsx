@@ -1,67 +1,66 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const location = useLocation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+      setIsScrolled(window.scrollY > 50);
+    };
 
     const handleResize = () => {
       if (window.innerWidth > 768 && isMenuOpen) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [isMenuOpen])
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
+    setIsMenuOpen(!isMenuOpen);
     if (!isMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'
+      document.body.style.overflow = 'auto';
     }
-  }
+  };
 
   const closeMenu = () => {
-    setIsMenuOpen(false)
-    document.body.style.overflow = 'auto'
-  }
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'auto';
+  };
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = sectionId => {
     if (location.pathname === '/') {
-      const element = document.querySelector(sectionId)
+      const element = document.querySelector(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
       // Navigate to home and scroll to section
-      window.location.href = `/#${sectionId.replace('#', '')}`
+      window.location.href = `/#${sectionId.replace('#', '')}`;
     }
-    closeMenu()
-  }
+    closeMenu();
+  };
 
   const handleNavClick = (e, target) => {
     if (target.startsWith('#')) {
-      e.preventDefault()
-      scrollToSection(target)
+      e.preventDefault();
+      scrollToSection(target);
     } else {
-      closeMenu()
+      closeMenu();
     }
-  }
+  };
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
@@ -71,7 +70,7 @@ const Header = () => {
           <li>
             <Link
               to="/"
-              onClick={(e) => handleNavClick(e, '#servizi')}
+              onClick={e => handleNavClick(e, '#servizi')}
               className={location.pathname === '/' ? 'active' : ''}
             >
               Servizi
@@ -80,7 +79,7 @@ const Header = () => {
           <li>
             <Link
               to="/"
-              onClick={(e) => handleNavClick(e, '#chi-siamo')}
+              onClick={e => handleNavClick(e, '#chi-siamo')}
               className={location.pathname === '/' ? 'active' : ''}
             >
               Chi Siamo
@@ -89,7 +88,7 @@ const Header = () => {
           <li>
             <Link
               to="/"
-              onClick={(e) => handleNavClick(e, '#testimonianze')}
+              onClick={e => handleNavClick(e, '#testimonianze')}
               className={location.pathname === '/' ? 'active' : ''}
             >
               Testimonianze
@@ -122,7 +121,7 @@ const Header = () => {
         </div>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

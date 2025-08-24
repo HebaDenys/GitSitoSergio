@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import aboutImage from '../assets/images/Chi_Siamo.jpg'
+import { motion } from 'framer-motion';
+import aboutImage from '../assets/images/Chi_Siamo.jpg';
 
 const About = () => {
   return (
@@ -28,9 +28,10 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <p>
-            Da oltre 10 anni, Traslochi Veloci trasforma i traslochi in esperienze positive.
-            Il nostro team di esperti sa quanto sia importante per te avere accanto persone di
-            fiducia che trattano i tuoi beni con cura e rispetto.
+            Da oltre 10 anni, Traslochi Veloci trasforma i traslochi in
+            esperienze positive. Il nostro team di esperti sa quanto sia
+            importante per te avere accanto persone di fiducia che trattano i
+            tuoi beni con cura e rispetto.
           </p>
           <p>
             La nostra missione è rendere ogni trasloco un nuovo inizio sereno.
@@ -52,7 +53,7 @@ const About = () => {
         </motion.div>
       </div>
     </motion.section>
-  )
-}
+  );
+};
 
-export default About
+export default About;
