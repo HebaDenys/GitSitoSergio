@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/GitSitoSergio">
+    <Router basename="/GitSitoSergio/">
       <div className="App">
         <Header />
         <AnimatePresence mode="wait">

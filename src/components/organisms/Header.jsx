@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { NavigationMenu } from '../molecules';
 import { Button, Icon } from '../atoms';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +30,16 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  // Scroll to top when navigating to contact or services page
+  useEffect(() => {
+    if (location.pathname === '/contattaci' || location.pathname === '/servizi') {
+      const timer = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     if (!isMenuOpen) {
@@ -45,20 +58,60 @@ const Header = () => {
     const element = document.querySelector(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If section doesn't exist on current page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    closeMenu();
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     closeMenu();
   };
 
   const handleNavClick = (e, item) => {
-    if (item.to && item.to.startsWith('#')) {
+    if (item.to === '/') {
+      // Home button - navigate to home and scroll to top
+      if (location.pathname !== '/') {
+        navigate('/', { replace: false });
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      closeMenu();
+    } else if (item.to && item.to.startsWith('#')) {
       e.preventDefault();
-      scrollToSection(item.to);
+
+      // If we're not on the home page and the target is a section that exists on home page
+      const homeSections = ['#chi-siamo', '#servizi', '#testimonianze'];
+      if (location.pathname !== '/' && homeSections.includes(item.to)) {
+        // Navigate to home page first, then scroll to section
+        navigate('/', { replace: false });
+        // Use setTimeout to ensure navigation completes before scrolling
+        setTimeout(() => {
+          scrollToSection(item.to);
+        }, 100);
+      } else {
+        // We're on the home page or the section exists on current page
+        scrollToSection(item.to);
+      }
     } else {
       closeMenu();
     }
   };
 
   const navigationItems = [
+    { id: 'home', label: 'Home', to: '/' },
     { id: 'services', label: 'Servizi', to: '#servizi' },
     { id: 'about', label: 'Chi Siamo', to: '#chi-siamo' },
     { id: 'testimonials', label: 'Testimonianze', to: '#testimonianze' },
@@ -69,7 +122,12 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <nav>
         <div className="logo">
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleLogoClick}
+            style={{ cursor: 'pointer' }}
+          >
             Traslochi Veloci
           </motion.div>
         </div>
