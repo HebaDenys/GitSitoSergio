@@ -618,6 +618,7 @@ img {
 }
 
 .mobile-menu-toggle span {
+  display: block;
   width: 30px;
   height: 4px;
   background-color: #f5f3e8;

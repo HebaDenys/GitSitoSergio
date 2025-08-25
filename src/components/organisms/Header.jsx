@@ -32,13 +32,19 @@ const Header = () => {
 
   // Scroll to top when navigating to contact or services page
   useEffect(() => {
-    if (location.pathname === '/contattaci' || location.pathname === '/servizi') {
-      const timer = setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [location.pathname]);
+    // Add a small delay to ensure the page has fully loaded and prevent F5 errors
+    const timer = setTimeout(() => {
+      try {
+        if (location && (location.pathname === '/contattaci' || location.pathname === '/servizi')) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      } catch (error) {
+        // Silently handle any errors during page refresh
+        console.log('Page initialization in progress...');
+      }
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [location?.pathname]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -155,7 +161,9 @@ const Header = () => {
             onClick={toggleMenu}
             aria-label="Toggle mobile menu"
           >
-            <Icon name={isMenuOpen ? 'close' : 'menu'} size="medium" />
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </nav>
